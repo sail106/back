@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @Slf4j
 @Getter
-public class UserJoinRequest {
+public class UserRegistRequest {
     private String email;
     private String password;
 

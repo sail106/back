@@ -1,7 +1,7 @@
 package com.sail.back.user.model.service;
 
 import com.sail.back.user.model.dto.request.UserInfoRequest;
-import com.sail.back.user.model.dto.request.UserJoinRequest;
+import com.sail.back.user.model.dto.request.UserRegistRequest;
 import com.sail.back.user.model.entity.User;
 import com.sail.back.user.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class UserServiceImpl implements UserService{
     UserRepository userRepository;
 
     @Override
-    public User joinUser(UserJoinRequest userJoinRequest){
-        User user = User.builder().email(userJoinRequest.getEmail()).password(userJoinRequest.getPassword()).build();
+    public User registUser(UserRegistRequest userRegistRequest){
+        User user = User.builder().email(userRegistRequest.getEmail()).password(userRegistRequest.getPassword()).build();
         return userRepository.save(user);
     }
 
