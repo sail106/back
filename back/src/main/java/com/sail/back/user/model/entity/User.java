@@ -3,11 +3,10 @@ package com.sail.back.user.model.entity;
 import com.sail.back.user.model.entity.enums.AuthProvider;
 import com.sail.back.user.model.entity.enums.UserRole;
 import com.sail.back.user.model.entity.enums.UserStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CurrentTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -20,10 +19,11 @@ import java.time.LocalDateTime;
 @Builder
 public class User {
     @Id
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", precision = 10, scale = 2)
     private Long id;
 
-    @Column(name="email")
+    @Column(name="email", unique = true, nullable = false)
     private String email;
 
     @Column(name="department")
@@ -32,18 +32,21 @@ public class User {
     @Column(name="name")
     private String name;
 
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="create_at")
+    @Column(name = "create_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createAt;
 
-    @Column(name="provider")
+    @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @Column(name="role")
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @Column(name="status")
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    @Column(name="profile_img_url")
+    private String profileImgUrl;
 }

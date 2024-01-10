@@ -17,14 +17,5 @@ import java.time.LocalDateTime;
 @Slf4j
 @Getter
 public class UserInfoRequest {
-    private String email;
-    private String department;
-    private String password;
-    private String name;
-    private AuthProvider provider;
-    private String position;
-    private LocalDateTime create_at;
-    private UserRole role;
-    private UserStatus status;
-
+    private Long id;
 }

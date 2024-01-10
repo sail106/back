@@ -8,5 +8,7 @@ public interface UserService {
 
     User registUser(UserRegistRequest userRegistRequest);
     User infoUser(UserInfoRequest userInfoRequest);
+    void withdrawUser(UserRegistRequest userRegistRequest);
+    User updateUser(UserRegistRequest userRegistRequest);
 
 }
