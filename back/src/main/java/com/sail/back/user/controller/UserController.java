@@ -1,25 +1,25 @@
 package com.sail.back.user.controller;
 
-import com.sail.back.user.model.dto.request.UserInfoRequest;
+import com.sail.back.user.model.dto.request.UserIdRequest;
 import com.sail.back.user.model.dto.request.UserRegistRequest;
-import com.sail.back.user.model.dto.response.UserInfoResponse;
+import com.sail.back.user.model.dto.request.UserUpdateRequest;
 import com.sail.back.user.model.entity.User;
 import com.sail.back.user.model.service.UserService;
-
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/v1/users")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
+
 
     private final UserService userService;
 
@@ -33,15 +33,22 @@ public class UserController {
     }
 
     @PostMapping("/info")
-    public ResponseEntity<User> info(@RequestBody UserInfoRequest userInfoRequest) {
-        User user = userService.infoUser(userInfoRequest);
+    public ResponseEntity<User> info(@RequestBody UserIdRequest userIdRequest) {
+        User user = userService.infoUser(userIdRequest);
         return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody UserInfoRequest userInfoRequest) {
-
+    @DeleteMapping("/withdraw")
+    public ResponseEntity<Void> delete(@RequestBody UserIdRequest userIdRequest) {
+        userService.withdrawUser(userIdRequest);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<User> update(@RequestBody UserUpdateRequest userUpdateRequest){
+        User user = userService.updateUser(userUpdateRequest);
+
+        return ResponseEntity.ok(user);
     }
 
 }
