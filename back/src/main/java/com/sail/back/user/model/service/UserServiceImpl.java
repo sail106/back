@@ -10,6 +10,7 @@ import io.netty.util.internal.StringUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -21,10 +22,10 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
     @Override
     public User registUser(UserRegistRequest userRegistRequest){
-        User user = User.builder().email(userRegistRequest.getEmail()).password(userRegistRequest.getPassword()).createAt(null).build();
+        User user = User.builder().email(userRegistRequest.getEmail()).password(passwordEncoder.encode(userRegistRequest.getPassword())).build();
         return userRepository.save(user);
     }
 

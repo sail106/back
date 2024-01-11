@@ -1,5 +1,6 @@
 package com.sail.back.user.controller;
 
+import com.sail.back.global.utils.MessageUtils;
 import com.sail.back.user.model.dto.request.UserIdRequest;
 import com.sail.back.user.model.dto.request.UserRegistRequest;
 import com.sail.back.user.model.dto.request.UserUpdateRequest;
@@ -25,30 +26,30 @@ public class UserController {
 
 
     @PostMapping("/regist")
-    public ResponseEntity<Void> register(@RequestBody UserRegistRequest userRegistRequest) {
+    public ResponseEntity<MessageUtils> register(@RequestBody UserRegistRequest userRegistRequest) {
         log.debug("UserRegistRequest={}",userRegistRequest);
         User user = userService.registUser(userRegistRequest);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(MessageUtils.success());
     }
 
     @PostMapping("/info")
-    public ResponseEntity<User> info(@RequestBody UserIdRequest userIdRequest) {
+    public ResponseEntity<MessageUtils> info(@RequestBody UserIdRequest userIdRequest) {
         User user = userService.infoUser(userIdRequest);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok().body(MessageUtils.success(user));
     }
 
     @DeleteMapping("/withdraw")
-    public ResponseEntity<Void> delete(@RequestBody UserIdRequest userIdRequest) {
+    public ResponseEntity<MessageUtils> delete(@RequestBody UserIdRequest userIdRequest) {
         userService.withdrawUser(userIdRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(MessageUtils.success());
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<User> update(@RequestBody UserUpdateRequest userUpdateRequest){
+    public ResponseEntity<MessageUtils> update(@RequestBody UserUpdateRequest userUpdateRequest){
         User user = userService.updateUser(userUpdateRequest);
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok().body(MessageUtils.success(user));
     }
 
 }

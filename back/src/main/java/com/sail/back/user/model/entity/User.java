@@ -1,6 +1,7 @@
 package com.sail.back.user.model.entity;
 
 import com.sail.back.user.model.entity.enums.AuthProvider;
+import com.sail.back.user.model.entity.enums.UserGender;
 import com.sail.back.user.model.entity.enums.UserRole;
 import com.sail.back.user.model.entity.enums.UserStatus;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CurrentTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="users")
@@ -26,11 +28,11 @@ public class User {
     @Column(name="email", unique = true, nullable = false)
     private String email;
 
-    @Column(name="department")
-    private String department;
-
     @Column(name="name")
     private String name;
+
+    @Column(name = "nickname")
+    private String nickname;
 
     @Column(name="password", nullable = false)
     private String password;
@@ -49,4 +51,13 @@ public class User {
 
     @Column(name="profile_img_url")
     private String profileImgUrl;
+
+    @Enumerated(EnumType.STRING)
+    private UserGender gender;
+
+    @Column(name = "birthdate_year")
+    private String birthdateYear;
+
+    @Column(name = "birthdate_month")
+    private String birthdateMonth;
 }

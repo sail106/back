@@ -32,22 +32,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="back" type="f1a62948:ProjectNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="back" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="back" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="back" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -118,7 +102,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -132,6 +119,9 @@
       <recent name="D:\SSAFY\rail106\back\back\src\main\java\com\sail\back\user\model\dto\response" />
       <recent name="D:\SSAFY\rail106\back\back\src\main\java\com\sail\back\user\controller" />
       <recent name="D:\SSAFY\rail106\back\back\src\main\java\com\sail\back\user" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sail.back.user.model.entity.enums" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BackApplication">
@@ -225,7 +215,7 @@
     </configuration>
     <configuration name="BackApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="back.back.main~1" />
+      <module name="back.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.sail.back.BackApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -234,9 +224,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.back" />
+        <item itemvalue="Gradle.back [dependencies]" />
         <item itemvalue="Gradle.back [clean]" />
         <item itemvalue="Gradle.BackApplicationTests" />
-        <item itemvalue="Gradle.back [dependencies]" />
       </list>
     </recent_temporary>
   </component>
@@ -248,6 +238,13 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringProfilesService">
+    <option name="activeProfiles">
+      <map>
+        <entry key="back.main" value="jeon" />
+      </map>
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="05650100-1b7a-496a-86f8-114d640fe445" name="Changes" comment="" />

@@ -1,9 +1,8 @@
 package com.sail.back.global.config;
 
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,10 +12,12 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-
+@Configuration
+@EnableCaching
+@RequiredArgsConstructor
 public class RedisConfig {
 
-
+    private final RedisProperties redisProperties;
 
     // lettuce
     @Bean
