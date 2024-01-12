@@ -116,11 +116,13 @@ public class User implements UserDetails {
                 .gender(ToMap((String) map.get("gender")))
                 .profileImgUrl((String) map.get("picture"))
                 .provider((AuthProvider) map.get("provider"))
+                .role(UserRole.USER)
+                .status(UserStatus.ACTIVE)
                 .build();
     }
 
     static UserGender ToMap(String gender){
-        if (gender.equals("male")||gender.equals("MALE")){
+        if (gender.equals("male")||gender.equals("MALE")||gender.equals("M")){
             return UserGender.MALE;
         }
         return UserGender.FEMALE;
