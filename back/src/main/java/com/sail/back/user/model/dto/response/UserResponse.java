@@ -11,8 +11,10 @@ import com.sail.back.user.model.entity.enums.UserRole;
 import com.sail.back.user.model.entity.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor

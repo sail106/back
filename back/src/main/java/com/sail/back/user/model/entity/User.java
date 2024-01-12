@@ -1,6 +1,7 @@
 package com.sail.back.user.model.entity;
 
 import com.sail.back.security.model.dto.request.LoginRequest;
+import com.sail.back.user.model.dto.response.UserResponse;
 import com.sail.back.user.model.entity.enums.AuthProvider;
 import com.sail.back.user.model.entity.enums.UserGender;
 import com.sail.back.user.model.entity.enums.UserRole;
@@ -11,11 +12,13 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 @Entity
 @Table(name="users")
@@ -102,5 +105,24 @@ public class User implements UserDetails {
         return true;
     }
 
+    public static User of(OAuth2User oAuth2User){
+        Map<String, Object> map = oAuth2User.getAttributes();
+        return User.builder()
+                .email((String) map.get("email"))
+                .name((String) map.get("name"))
+                .nickname((String) map.get("name"))
+                .birthdateMonth((String) map.get("birthDateMonth"))
+                .birthdateYear((String) map.get("birthDateYear"))
+                .gender(ToMap((String) map.get("gender")))
+                .profileImgUrl((String) map.get("picture"))
+                .provider((AuthProvider) map.get("provider"))
+                .build();
+    }
 
+    static UserGender ToMap(String gender){
+        if (gender.equals("male")||gender.equals("MALE")){
+            return UserGender.MALE;
+        }
+        return UserGender.FEMALE;
+    }
 }
