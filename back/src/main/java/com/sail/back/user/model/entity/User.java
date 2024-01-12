@@ -107,18 +107,27 @@ public class User implements UserDetails {
 
     public static User of(OAuth2User oAuth2User){
         Map<String, Object> map = oAuth2User.getAttributes();
-        return User.builder()
-                .email((String) map.get("email"))
-                .name((String) map.get("name"))
-                .nickname((String) map.get("name"))
-                .birthdateMonth((String) map.get("birthDateMonth"))
-                .birthdateYear((String) map.get("birthDateYear"))
-                .gender(ToMap((String) map.get("gender")))
-                .profileImgUrl((String) map.get("picture"))
-                .provider((AuthProvider) map.get("provider"))
-                .role(UserRole.USER)
-                .status(UserStatus.ACTIVE)
-                .build();
+        User user = new User();
+        String email =(String) map.get("email");
+        String name =(String) map.get("name");
+        String nickName =(String) map.get("nickName");
+        String birthDateMonth =(String) map.get("birthDateMonth");
+        String birthDateYear =(String) map.get("birthDateYear");
+        String gender = (String) map.get("gender");
+        String picture =(String) map.get("picture");
+        AuthProvider provider = (AuthProvider) map.get("provider");
+
+        if (email!=null) user.setEmail(email);
+        if (name!=null) user.setName(name);
+        if (nickName!=null) user.setNickname(nickName);
+        if (birthDateMonth!=null) user.setBirthdateMonth(birthDateMonth);
+        if (birthDateYear!=null) user.setBirthdateYear(birthDateYear);
+        if (gender!=null) user.setGender(ToMap(gender));
+        if (picture!=null) user.setProfileImgUrl(picture);
+        if (provider!=null) user.setProvider(provider);
+        user.setStatus(UserStatus.ACTIVE);
+        user.setRole(UserRole.USER);
+        return user;
     }
 
     static UserGender ToMap(String gender){
