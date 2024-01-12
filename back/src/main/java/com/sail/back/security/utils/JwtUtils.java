@@ -2,6 +2,7 @@ package com.sail.back.security.utils;
 
 import com.sail.back.security.config.JwtProperties;
 import com.sail.back.security.exception.JwtErrorCode;
+import com.sail.back.security.model.repository.UnsafeTokenRepository;
 import io.jsonwebtoken.*;
 import com.sail.back.security.exception.JwtException;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -30,6 +31,7 @@ public class JwtUtils {
     private String accessSecretKey;
     private String refreshSecretKey;
 
+    private final UnsafeTokenRepository unsafeTokenRepository;
     @PostConstruct
     protected void init(){
         accessSecretKey = Base64.getEncoder().encodeToString(
@@ -46,6 +48,7 @@ public class JwtUtils {
     }
     //토큰만료시간
     public Date getExpiredTime(Long period){
+        log.info("기간={}",period);
         return Date.from(ZonedDateTime.now(zoneId).plus(Duration.ofMillis(period)).toInstant());
     }
 
@@ -62,6 +65,7 @@ public class JwtUtils {
 
     //엑세스 토큰 생성
     public String generateAccessToken(Long id, String role){
+        log.info("토큰생성={}", id);
         return Jwts.builder()
                 .setSubject(String.valueOf(id))
                 .claim("role", role)
@@ -75,8 +79,11 @@ public class JwtUtils {
      * 엑세스 토큰 검증
      */
     public Jws<Claims> validateAccessToken(final String token){
+
         try{
-            return Jwts.parser().setSigningKey(accessSecretKey).parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(accessSecretKey).parseClaimsJws(token);
+            unsafeTokenRepository.findById(token).ifPresent(value->{throw new JwtException(JwtErrorCode.TOKEN_SIGNATURE_ERROR);});
+            return claimsJws;
         }catch ( MalformedJwtException e){
             log.info("exception : 잘못된 엑세스 토큰 시그니처");
             throw new JwtException(JwtErrorCode.TOKEN_SIGNATURE_ERROR, e.getMessage());

@@ -12,5 +12,9 @@ public class JwtException extends RuntimeException{
         super(e);
         this.jwtErrorCode=jwtErrorCode;
     }
+    public JwtException(JwtErrorCode jwtErrorCode){
+        super(jwtErrorCode.getMessage());
+        this.jwtErrorCode=jwtErrorCode;
+    }
 
 }
